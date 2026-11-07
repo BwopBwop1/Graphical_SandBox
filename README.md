@@ -22,13 +22,16 @@
 
  The build script would look as follow with a caveat mentioned below.
 
- '''
+ ```
+```
   gcc --debug  -o Test.out src/main.c `pkg-config --cflags --libs raylib` -lm
- '''
+ ```
+```
 
  Depending on your windowing service you might need to include an other library for example on my system the build script looks like this.
 
- '''
+ ```
+```
 
   gcc --debug  -o Test.out src/main.c `pkg-config --cflags --libs raylib x11` -lm
 
@@ -36,7 +39,8 @@
 
   gcc --debug  -o Test.out src/main.c `pkg-config --cflags --libs raylib glew` -lm
 
- '''
+ ```
+```
 
  You might even see in the main.c file the build script I use just pasted in there as a comment for convenience. 
  The reason the build script is either X11 or glew is just because glew will includes X11 implicitly and I used it during a transitional period between sdl and raylib.
