@@ -3,8 +3,7 @@
  This is a repo that will contain all my future graphical programming endeavours currently only host a primitive grass rendering pipeline.
  
 # Grass Rendering
-[Grass Demo Example](assets/git/BELH.gif)
-
+![til](./assets/git/BELH.gif)
 
 # Future Additions planned
 
