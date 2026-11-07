@@ -38,6 +38,6 @@
  ```
 
  You might even see in the main.c file the build script I use just pasted in there as a comment for convenience. 
- The reason the build script is either X11 or glew is just because glew will includes X11 implicitly and I used it during a transitional period between sdl and raylib.
+ The reason the build script is either X11 or glew is just because glew will include X11 implicitly and I used it during a transitional period between sdl and raylib.
 
 
