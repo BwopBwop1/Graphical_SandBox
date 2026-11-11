@@ -16,28 +16,20 @@
  Clouds
 
 # Building
-
- Currently the only platform that this application supports is Linux as I haven't quite gotten around to adding in 
- CMake and making sure the includes are not platform specific.
-
- The build script would look as follow with a caveat mentioned below.
+  Building this project is as simple as running CMake which on linux is trival to set up and on windows a pain in the behind.
+  But I digress. Below are the provided build scripts that should work on a good amount of systems.
 
  ```
-  gcc --debug  -o Test.out src/main.c `pkg-config --cflags --libs raylib` -lm
  ```
+   cmake -S . -B build
+   cmake --build build
+   ./graphical_sandbox
  
 
- Depending on your windowing service you might need to include an other library for example on my system the build script looks like this.
-
- ```
-  gcc --debug  -o Test.out src/main.c `pkg-config --cflags --libs raylib x11` -lm
-
-  or 
-
-  gcc --debug  -o Test.out src/main.c `pkg-config --cflags --libs raylib glew` -lm
- ```
-
- You might even see in the main.c file the build script I use just pasted in there as a comment for convenience. 
- The reason the build script is either X11 or glew is just because glew will include X11 implicitly and I used it during a transitional period between sdl and raylib.
+  Please note that this was not tested on any other system then a Linux Mint Distro so the likely hood of this working
+  on a separate Operating system while greater then non-zero could also still be zero.
+  
+  Make sure the machine that you run this on supports Opengl 4.3 or higher and has a compatible C standard library 
+  (Yes, I know. Quite the demanding requirements.)
 
 
