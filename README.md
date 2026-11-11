@@ -20,10 +20,10 @@
   But I digress. Below are the provided build scripts that should work on a good amount of systems.
 
  ```
- ```
    cmake -S . -B build
    cmake --build build
    ./graphical_sandbox
+ ```
  
 
   Please note that this was not tested on any other system then a Linux Mint Distro so the likely hood of this working
