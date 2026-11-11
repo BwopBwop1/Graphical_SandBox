@@ -1,3 +1,7 @@
+# This is was based off a Template from
+# https://github.com/SasLuca/raylib-cmake-template/blob/master/CMakeLists.txt
+# So thanks for doing most of the CMakeList.
+
 cmake_minimum_required(VERSION 3.10)
 project(graphical_sandbox LANGUAGES C)
 
@@ -32,7 +36,6 @@ else()
 endif()
 
 
-# Adding our source files
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/src/*.c")
 set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/include/") 
 
@@ -40,7 +43,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}")
 
-# Declaring our executable
 add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_INCLUDE})
