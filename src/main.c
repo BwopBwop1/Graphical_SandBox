@@ -24,16 +24,8 @@
 #include <stdint.h>
 #include <string.h>
 #include <fcntl.h>
-#include <unistd.h>
 #include <errno.h>
 #include <math.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <sys/socket.h>
-#include <sys/un.h>
-#include <sys/poll.h>
 
 #include <raylib.h>
 #include <raymath.h>
@@ -73,8 +65,8 @@ typedef struct memoryArena {
  void *memory;
 } memoryArena;
 
-int32_t connect_to_listener(int32_t *fd);
-int32_t check_and_get_event(int32_t fd);
+//int32_t connect_to_listener(int32_t *fd);
+//int32_t check_and_get_event(int32_t fd);
 void *pushSize(memoryArena *arena, size_t size);
 
 
@@ -134,8 +126,8 @@ void GetVerticeRange(v2 *x, v2 *y, v2 *z, float *vertices, uint32_t count) {
 void main() {
   memoryArena arena;
 
-  int32_t file_descriptor = 0;
-  connect_to_listener(&file_descriptor);
+  //int32_t file_descriptor = 0;
+  //connect_to_listener(&file_descriptor);
   
   arena.size = Megabytes(2);
   arena.used = 0;
@@ -483,6 +475,7 @@ void *pushSize(memoryArena *arena, size_t size) {
   return (void *)(result);
 }
 
+/*
 int32_t connect_to_listener(int32_t *fd) {
   const char *path = "/run/user/1000/keyboardListener";
 
@@ -545,3 +538,4 @@ int32_t check_and_get_event(int32_t fd) {
 
   return 1;
 }
+*/
