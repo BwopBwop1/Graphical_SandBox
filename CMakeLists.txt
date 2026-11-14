@@ -12,9 +12,10 @@ find_package(raylib QUIET)
 if (NOT raylib_FOUND)
   message(STATUS "Raylib not found. Fetching Raylib...")
 
-  message(WARNING "A Raylib that is fetched can not have custom frame time set which may cause errors like input not being polled correctly.")
-  message(WARNING "If you or a loved one is suffering from this. A preprepared raylib package will run better make sure to compile with opengl 430 or above.")
-  message(WARNING "And to set the flag in the config.h header of raylib for custom frame control.")
+  message(WARNING "A Raylib that is fetched can not have custom frame time set \nwhich may cause errors like input not being polled correctly.\n"
+  "If you or a loved one is suffering from this. \nA preprepared raylib package will run better make sure to compile with opengl 430 or above.\n"
+  "And to set the flag in the config.h header of raylib for custom frame control.\n" 
+  "Or just change the frame-control define between the first step and the second step in the build process.\n")
 
   include(FetchContent)
   set(FETCHCONTENT_QUIET FALSE)
