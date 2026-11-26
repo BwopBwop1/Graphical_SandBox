@@ -30,43 +30,22 @@ struct SceneState {
   memoryArena arena;
 };
 
-static void GetVerticeRange(v2 *x, v2 *y, v2 *z, float *vertices, uint32_t count) {
+static void Entry(common_context *ctx, void **data);
+static void Exit(common_context *ctx, void *data);
+static void Render(common_context *ctx, void *data);
+static void Update(common_context *ctx, void *data);
 
-  v2 x_dim = {0};
-  v2 y_dim = {0};
-  v2 z_dim = {0};
+struct Scene s_grassOnly = {
+  .EntryFunction = Entry, 
+  .ExitFunction = Exit, 
+  .RenderFunction = Render, 
+  .UpdateFunction = Update
+};
 
-  uint32_t index = 0;
-  for (uint32_t i = 0; i < count; i++) {
-    float x = vertices[index];
-    float y = vertices[index + 1];
-    float z = vertices[index + 2];
-    
-    if (i == 0) {
-      x_dim = (v2){x, x};
-      y_dim = (v2){y, y};
-      z_dim = (v2){z, z};
-      continue;
-    }
+static void GetVerticeRange(v2 *x, v2 *y, v2 *z, float *vertices, uint32_t count);
 
-    if (x < x_dim.x) { x_dim.x = x; }
-    if (x > x_dim.y) { x_dim.y = x; }
-    if (y < y_dim.x) { y_dim.x = y; }
-    if (y > y_dim.y) { y_dim.y = y; }
-    if (z < z_dim.x) { z_dim.x = z; }
-    if (z > z_dim.y) { z_dim.y = z; }
 
-    // Advance by 3 because we are looking at a buffer of floats not bytes
-    // index += sizeof(v3); -Bwop
-    index += 3;   
-  }
-  
-  *x = x_dim;
-  *y = y_dim;
-  *z = z_dim;
-}
-
-static void grass_EntryFunction(common_context *ctx, void **data) {
+static void Entry(common_context *ctx, void **data) {
 
   *data = MemAlloc(sizeof(struct SceneState));
   struct SceneState *state = (struct SceneState *)*data;
@@ -215,7 +194,7 @@ static void grass_EntryFunction(common_context *ctx, void **data) {
 
 }
 
-static void grass_ExitFunction(common_context *ctx, void *data) {
+static void Exit(common_context *ctx, void *data) {
   if (!data) {
     return;
   }
@@ -225,7 +204,7 @@ static void grass_ExitFunction(common_context *ctx, void *data) {
   MemFree(data);
 }
 
-static void grass_UpdateFunction(common_context *ctx, void *data) {
+static void Update(common_context *ctx, void *data) {
   if (!data) {
     return;
   }
@@ -254,7 +233,7 @@ static void grass_UpdateFunction(common_context *ctx, void *data) {
 
 }
 
-static void grass_RenderFunction(common_context *ctx, void *data) {
+static void Render(common_context *ctx, void *data) {
 
   if (!data) {
     return;
@@ -333,4 +312,40 @@ static void grass_RenderFunction(common_context *ctx, void *data) {
   rlEnableBackfaceCulling();
   EndMode3D();
 
+}
+
+static void GetVerticeRange(v2 *x, v2 *y, v2 *z, float *vertices, uint32_t count) {
+
+  v2 x_dim = {0};
+  v2 y_dim = {0};
+  v2 z_dim = {0};
+
+  uint32_t index = 0;
+  for (uint32_t i = 0; i < count; i++) {
+    float x = vertices[index];
+    float y = vertices[index + 1];
+    float z = vertices[index + 2];
+    
+    if (i == 0) {
+      x_dim = (v2){x, x};
+      y_dim = (v2){y, y};
+      z_dim = (v2){z, z};
+      continue;
+    }
+
+    if (x < x_dim.x) { x_dim.x = x; }
+    if (x > x_dim.y) { x_dim.y = x; }
+    if (y < y_dim.x) { y_dim.x = y; }
+    if (y > y_dim.y) { y_dim.y = y; }
+    if (z < z_dim.x) { z_dim.x = z; }
+    if (z > z_dim.y) { z_dim.y = z; }
+
+    // Advance by 3 because we are looking at a buffer of floats not bytes
+    // index += sizeof(v3); -Bwop
+    index += 3;   
+  }
+  
+  *x = x_dim;
+  *y = y_dim;
+  *z = z_dim;
 }

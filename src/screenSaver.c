@@ -1,14 +1,26 @@
 
 #include "common.h"
 
-struct saver_SceneState {
+struct SceneState {
   memoryArena arena;
 };
 
-static void saver_EntryFunction(common_context *ctx, void **data) {
+static void Entry(common_context *ctx, void **data);
+static void Exit(common_context *ctx, void *data);
+static void Render(common_context *ctx, void *data);
+static void Update(common_context *ctx, void *data);
 
-  *data = MemAlloc(sizeof(struct saver_SceneState));
-  struct saver_SceneState *state = (struct saver_SceneState *)*data;
+struct Scene s_screenSaver = {
+  .EntryFunction = Entry, 
+  .ExitFunction = Exit, 
+  .RenderFunction = Render, 
+  .UpdateFunction = Update
+};
+
+static void Entry(common_context *ctx, void **data) {
+
+  *data = MemAlloc(sizeof(struct SceneState));
+  struct SceneState *state = (struct SceneState *)*data;
 
   state->arena.size = Megabytes(2);
   state->arena.used = 0;
@@ -35,14 +47,14 @@ static void saver_EntryFunction(common_context *ctx, void **data) {
 
 }
 
-static void saver_ExitFunction(common_context *ctx, void *data) {
+static void Exit(common_context *ctx, void *data) {
 
 }
 
-static void saver_UpdateFunction(common_context *ctx, void *data) {
+static void Update(common_context *ctx, void *data) {
 
 }
 
-static void saver_RenderFunction(common_context *ctx, void *data) {
+static void Render(common_context *ctx, void *data) {
 
 }

@@ -20,9 +20,8 @@
 
 
 #include "common.h"
+#include "scenes.h"
 
-#include "grassOnly.c"
-#include "screenSaver.c"
 
 typedef struct event {
  int32_t type;
@@ -52,15 +51,8 @@ void main() {
   ListOfScenes.buf = pushSize(&arena, sizeof(SceneList) * ListOfScenes.size);
   ListOfScenes.count = 2;
 
-  ListOfScenes.buf[0].EntryFunction = grass_EntryFunction;
-  ListOfScenes.buf[0].ExitFunction = grass_ExitFunction;
-  ListOfScenes.buf[0].UpdateFunction = grass_UpdateFunction;
-  ListOfScenes.buf[0].RenderFunction = grass_RenderFunction;
-
-  ListOfScenes.buf[1].EntryFunction = saver_EntryFunction;
-  ListOfScenes.buf[1].ExitFunction = saver_ExitFunction;
-  ListOfScenes.buf[1].UpdateFunction = saver_UpdateFunction;
-  ListOfScenes.buf[1].RenderFunction = saver_RenderFunction;
+  ListOfScenes.buf[0] = s_grassOnly;
+  ListOfScenes.buf[1] = s_screenSaver;
   
   SetConfigFlags(FLAG_WINDOW_TRANSPARENT | FLAG_WINDOW_TOPMOST);
   InitWindow(960, 540, "Window");
